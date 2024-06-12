@@ -3,6 +3,16 @@
 
 ## 1일차
 - Spring Boot 개요
+    - Servlet > EJB > JSP > Spring > Spring Boot
+    - 장점
+        - Spring의 기술을 그대로 사용가능(simple migration)
+        - JPA를 사용하면 ERD나 DB 설계를 하지않고도 손쉽게 DB 생성
+        - Tomcat 서버 내장(따로 설치할 필요 없음)
+        - Support 기능 다수 사용 가능
+        - JUnit 테스트 Log4J2 로그 모두 포함
+        - JSP, **Thymeleaf**, Mustache 편하게 사용가능
+        - DB 연동이 매우 쉽다
+
 - Spring Boot 개발환경 설정
     - Java JDK 확인 > 17버젼 이상
         - https://jdk.java.net/archive/
@@ -59,7 +69,24 @@
         - src/main/resources/application.properties(또는 .yaml) 확인
         - src/java/groupid/artifactid/java 소스파일 위치, 작업
         - src/main/resources/프로젝트 설정 파일, 웹 리소스 파일(css, js, html, jsp 등등)
-        - Spring01Application.Java, run | debug 중 하나 클릭하여 서버 실행
+        - Spring Boot DashBoard
+            - Spring01Application.Java, run | debug 중 하나 클릭하여 서버 실행
+            - 디버그로 실행해야 Hot code replace 동작
         - 브라우저 설정 변경
             - 설정(ctrl + ,) > browser > Spring > DashBoard Open with 'Internal' -> 'external'로 변경
             - 크롬으로 기본 브라우저로 사용하는 거 추천
+
+## 2일차
+- Oracle 도커로 설치
+    - 설치되어 있는 Oracle 삭제
+
+- DataBase 설정
+    - H2 DB: Spring Boot에 손쉽게 사용가능한 Inmemory DB, Oracle, MySql, sqlServer와 쉽게 호환
+    - Oracle: 운영 시 사용할 DB (main)
+    - MySql: 운영 시 사용할 DB (optional)
+    - Oracle PKNUSB / pknu_P@ss 로 생성
+        - 콘솔
+        ```shell
+        > sqlplus system/password
+        ```
+
