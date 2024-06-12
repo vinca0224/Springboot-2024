@@ -5,6 +5,8 @@
 - Spring Boot 개요
 - Spring Boot 개발환경 설정
     - Visual Studio Code
+        - System Installer로 설치
+        - Extensions > Korean
     - Oracle latest version Docker
     - Node.js
     - React
