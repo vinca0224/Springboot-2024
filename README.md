@@ -4,9 +4,62 @@
 ## 1일차
 - Spring Boot 개요
 - Spring Boot 개발환경 설정
+    - Java JDK 확인 > 17버젼 이상
+        - https://jdk.java.net/archive/
+        - 시스템 속성(sysdm.cpl) > 환경변수 > JAVA_HOME 설정
+        
     - Visual Studio Code
         - System Installer로 설치
-        - Extensions > Korean
+        - Extensions > Korean 언어팩
+        - Extensions > JAVA > Extension Pack for Java
+        - Extensions > Spring > Spring Boot Extension Pack
+        - Extensions > Gradle > Gradle for Java
+
+    - Gradle build tool 고려
+        - https://gradle.org/releases/
+
     - Oracle latest version Docker
     - Node.js
     - React
+
+- Spring Boot 프로젝트 생성
+    - 메뉴 보기 > 명령 팔레트(ctrl + shift + p)
+        - Spring Initalzr: Create a Gradle project
+        - Specify Spring Boot version: 3.2.6
+        - Specify project language: Java
+        - Input group ID: com.vinca (개인적으로 변경)
+        - Input Artifact ID: spring01 (대문자 불가)
+        - Specify package type: JAR
+        - Specify Java version: 17
+        - Choose dependencies: selected 0 dependencies
+        - 폴더 선택 Dialog 팝업: 원하는 폴더 선택 후 generate
+        - 오른쪽 하단 팝업에서 open
+        - Git 설정 옵션, language Support for Java(TM) by Red Hat 설정 항상
+
+    - TroubleShooting
+        1. 프로젝트 생성이 진행되다 Gradle Connection 에러가 뜨면, 
+            - Extensions > Gradle > Gradle for Java 제거 후 
+            - vscode 재시작한 뒤 프로젝트 재생성
+        2. Gradle 빌드 시 버전 에러로 빌드가 실패하면,
+            - Gradle build tool 사이트에서 에러에 표시된 버젼의 Gradle bt 다운로드
+            - 개발 컴퓨터에 설치
+        3. ':compileJava' execution failed
+            - Java JDK 잘못된 설치 x86(32bit) x64비트 혼용 설치
+            - JDK 17버전 새로 설치 후 시스템 환경설정(환경변수)
+            - vscode 재시작
+            - build.gradle SpringBoot Framework 버전 다운그레이드 3.3.0 -> 3.1.5
+            - Gradle 빌드
+                1. 터미널에서 .\gradlew.bat 실행
+                2. Gradle for Java > Tasks > Build > Build play icon(Run task) 실행
+            - Spring Boot Dashboard
+                - Apps > Spring01 run | debug 중 하나 클릭하여 서버 실행
+           
+    - 프로젝트 생성 후
+        - build.gradle 확인
+        - src/main/resources/application.properties(또는 .yaml) 확인
+        - src/java/groupid/artifactid/java 소스파일 위치, 작업
+        - src/main/resources/프로젝트 설정 파일, 웹 리소스 파일(css, js, html, jsp 등등)
+        - Spring01Application.Java, run | debug 중 하나 클릭하여 서버 실행
+        - 브라우저 설정 변경
+            - 설정(ctrl + ,) > browser > Spring > DashBoard Open with 'Internal' -> 'external'로 변경
+            - 크롬으로 기본 브라우저로 사용하는 거 추천
