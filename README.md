@@ -4,6 +4,10 @@
 ## 1일차
 - Spring Boot 개요
     - Servlet > EJB > JSP > Spring > Spring Boot
+
+    - MVC    
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp002.png" width="730">
+
     - 장점
         - Spring의 기술을 그대로 사용가능(simple migration)
         - JPA를 사용하면 ERD나 DB 설계를 하지않고도 손쉽게 DB 생성
@@ -72,6 +76,9 @@
         - Spring Boot DashBoard
             - Spring01Application.Java, run | debug 중 하나 클릭하여 서버 실행
             - 디버그로 실행해야 Hot code replace 동작
+
+                <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp001.png" width="350">
+
         - 브라우저 설정 변경
             - 설정(ctrl + ,) > browser > Spring > DashBoard Open with 'Internal' -> 'external'로 변경
             - 크롬으로 기본 브라우저로 사용하는 거 추천
