@@ -85,6 +85,7 @@
 
 ## 2일차
 - Oracle 도커로 설치
+    - Docker는 Virtual Machine을 업그레이드한 시스템
     - 윈도우 서비스 내(services.msc) Oracle 관련 서비스 종료
     - Docker에서 Oracle 이미지 컨테이너를 다운로드 후 실행
     - Docker 설치 시 오류 Docker Desktop - WSL failed
@@ -92,14 +93,38 @@
         - Windows 업데이트 최신판
         - https://github.com/microsoft/WSL/releases wsl2.x.x.x64.msi 다운로드 설치 한 뒤 
         - Docker Desktop 재실행
+    - Oracle 최신판 설치
+    ```shell
+    > docker --version
+    Docker version 26.1.1, ....
+    > docker pull container-registry.oracle.com/database/free:latest
+    lateset: ...
+    ...: Download comlete
+    Repository                                      TAG         IMAGE ID        CREATED         SIZE     
+    container-registry.oracle.com/database/free     latest      7510f8869b04    7 weeks ago     8.7GB
+
+    > docker run -d -p 1521:1521 --name oracle container-registry.oracle.com/database/free
+    ....
+    > docker logs oracle
+    ....
+    > docker exec -it oracle bash
+    bash-4.4$
+    ```
+
+    - Oracle system 사용자 비번을 oralce로 설정
+    ```shell
+    bash-4.4$./setPassword.sh oracle
+    ```
+    
+    - Oracle 접속확인
+        - DBeaver 탐색기 > Create > Connection
 
 - DataBase 설정
-    - H2 DB: Spring Boot에 손쉽게 사용가능한 Inmemory DB, Oracle, MySql, sqlServer와 쉽게 호환
     - Oracle: 운영 시 사용할 DB (main)
-    - MySql: 운영 시 사용할 DB (optional)
     - Oracle PKNUSB / pknu_P@ss 로 생성
         - 콘솔
         ```shell
         > sqlplus system/password
         ```
-
+    - H2 DB: Spring Boot에 손쉽게 사용가능한 Inmemory DB, Oracle, MySql, sqlServer와 쉽게 호환
+    - MySql: 운영 시 사용할 DB (optional)
