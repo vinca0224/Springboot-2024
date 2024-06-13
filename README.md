@@ -125,6 +125,56 @@
         - 콘솔
         ```shell
         > sqlplus system/password
+        //서비스명 확인
+        SQL> select name from v$database;
+        //최신버전에서 사용자 생성 시 C## prefix 방지 쿼리
+        SQL> ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+        //사용자 생성
+        SQL> create user pknusb identified by "pknu_p@ss";
+        //사용자 권한
+        SQL> grant CONNECT, RESOURCE, CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW to pknusb;
+        //사용자 계정 테이블 공간 설정, 공간 쿼터
+        SQL> alter user pknusb default tablespace users;
+        SQL> alter user pknusb quota unlimited on users;
         ```
     - H2 DB: Spring Boot에 손쉽게 사용가능한 Inmemory DB, Oracle, MySql, sqlServer와 쉽게 호환
     - MySql: 운영 시 사용할 DB (optional)
+
+- Spring Boot + MyBatis
+    - application name: spring02
+    - Spring boot 3.3.x 에서는 Mybatis 없음
+    - Dependency 중 DB가 선택되어 있으면 웹서버 실행 안됨
+
+    - build.gradle 확인
+    - application.properties 추가 작성
+    ```properties
+        ## 포트변경
+        server.port=8091
+
+        ## 로그 색상
+        spring.output.ansi.enabled=always
+
+        ## 수정사항이 있으면 서버 자동 재빌드 설정
+        spring.devtools.livereload.enabled=true
+        spring.devtools.restart.enabled=true
+
+        ## 로그레벨 설정
+        logging.level.org.springframework=info
+        logging.level.org.zerok=debug
+
+        ## Oracle 설정 
+        spring.datasource.username=pknusb
+        spring.datasource.password=pknu_p@ss
+        ### docker X
+        spring.datasource.url= jdbc:oracle:thin@localhost:1521:XE
+        spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+
+        ## MyBatis 설정
+        ## mapper 폴더 및에 여러가지 폴더가 내재, 확장자는 .xml이지만 파일명은 뭐든지
+        mybatis.mapper-locations=classpath:mapper/**/*.xml
+        mybatis.type-aliases-package=com.vinca.spring02.domain
+    ```
+    
+    - MyBatis 적용
+        - Spring Boot 이전 resource/WEB-INF 위치에 root-context.xml에 DB, Mybatis 설정
+        - Spring Boot 이후 appliction.properties 설정 + Config.java로 변경
