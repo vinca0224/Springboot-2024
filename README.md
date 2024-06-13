@@ -85,7 +85,13 @@
 
 ## 2일차
 - Oracle 도커로 설치
-    - 설치되어 있는 Oracle 삭제
+    - 윈도우 서비스 내(services.msc) Oracle 관련 서비스 종료
+    - Docker에서 Oracle 이미지 컨테이너를 다운로드 후 실행
+    - Docker 설치 시 오류 Docker Desktop - WSL failed
+        - Docker Desktop 종료
+        - Windows 업데이트 최신판
+        - https://github.com/microsoft/WSL/releases wsl2.x.x.x64.msi 다운로드 설치 한 뒤 
+        - Docker Desktop 재실행
 
 - DataBase 설정
     - H2 DB: Spring Boot에 손쉽게 사용가능한 Inmemory DB, Oracle, MySql, sqlServer와 쉽게 호환
