@@ -9,7 +9,7 @@ import com.vinca.spring02.domain.Todo;
 @Mapper
 public interface TodoMapper {
     
-    List<Todo> selectTodos();
+    List<Todo> selectTodos() throws Exception;
 
-    Todo selectTodos(int tno);
+    Todo selectTodo(int tno) throws Exception;
 }

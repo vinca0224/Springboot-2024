@@ -142,9 +142,15 @@
 
 - Spring Boot + MyBatis
     - application name: spring02
-    - Spring boot 3.3.x 에서는 Mybatis 없음
-    - Dependency 중 DB가 선택되어 있으면 웹서버 실행 안됨
+    - Spring boot 3.3.x 에서는 Mybatis 없음 -> 3.2.6 선택
+    - Dependency
+        - Spring Boot DevTools
+        - Lombok
+        - Thymeleaf
+        - Oracle Driver
+        - MyBatis starter
 
+    - Dependency 중 DB가 선택 시, application.properties에 DB 설정이 안되면 서버 실행 안됨
     - build.gradle 확인
     - application.properties 추가 작성
     ```properties
@@ -172,9 +178,22 @@
         ## MyBatis 설정
         ## mapper 폴더 및에 여러가지 폴더가 내재, 확장자는 .xml이지만 파일명은 뭐든지
         mybatis.mapper-locations=classpath:mapper/**/*.xml
-        mybatis.type-aliases-package=com.vinca.spring02.domain
+        mybatis.type-aliases-package=com.vinca.spring02.mapper
     ```
     
     - MyBatis 적용
         - Spring Boot 이전 resource/WEB-INF 위치에 root-context.xml에 DB, Mybatis 설정
         - Spring Boot 이후 appliction.properties 설정 + Config.java로 변경
+
+    - 개발 시 순서
+        1. Database 테이블 생성
+        2. MyBatis 설정 -> /config/MyBatisConfig.java
+        3. 테이블과 일치하는 클래스 (domain, entity, DTO, VO(readonly), etc...) 생성
+            - 테이블 컬럼에 있는 _은 Java 클래스는 사용안함
+        4. DB에 데이터를 주고 받을 수 있는 클래스(DAO, **mapper**, repository) 생성
+            - 쿼리를 클래스 내 작성가능, xml로 분리가능 
+        5. **(Model)**분리 할 경우 /resources/mapper/클래스.xml 생성, 쿼리 입력
+        6. 서비스 인터페이스(/service/*Service.java), 서비스를 구현한 클래스(/service/*ServiceImpl.java) 생성, 작성
+        7. 사용자가 접근하는 컨트롤러 @RestController 클래스 생성 -> @Controller 변경 가능
+        8. **(Controller)**경우에 따라 @SpringBootApplication 클래스에 SqlSessionFactory 빈을 생성, 매소드 작성
+        9. **(View)**/resources/templates/Thymeleaf html 생성, 작성
