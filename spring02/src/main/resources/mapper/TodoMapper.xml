@@ -5,7 +5,7 @@
 
 <mapper namespace="com.vinca.spring02.mapper.TodoMapper">
 
-    <select id= "selectTodos" resultType= "com.vinca.spring02.domain.Todo">
+    <select id= "selectTodos" resultType= "Todo">
         SELECT TNO
              , TITLE
              , DUEDATE	
@@ -14,7 +14,7 @@
         FROM TODOS
     </select>
 
-    <select id="selectTodo" resultType="com.vinca.spring02.domain.Todo"
+    <select id="selectTodo" resultType="Todo"
                             parameterType="int">
         SELECT TNO
              , TITLE

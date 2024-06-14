@@ -186,6 +186,7 @@
         - Spring Boot 이후 appliction.properties 설정 + Config.java로 변경
 
     - 개발 시 순서
+        0. application.properties > jdbc:oracle:thin:@localhost:1521:XE, thin 뒤에 : 이 삭제되어 있었음
         1. Database 테이블 생성
         2. MyBatis 설정 -> /config/MyBatisConfig.java
         3. 테이블과 일치하는 클래스 (domain, entity, DTO, VO(readonly), etc...) 생성
@@ -197,3 +198,4 @@
         7. 사용자가 접근하는 컨트롤러 @RestController 클래스 생성 -> @Controller 변경 가능
         8. **(Controller)**경우에 따라 @SpringBootApplication 클래스에 SqlSessionFactory 빈을 생성, 매소드 작성
         9. **(View)**/resources/templates/Thymeleaf html 생성, 작성
+    
