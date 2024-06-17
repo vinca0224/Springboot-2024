@@ -228,7 +228,27 @@
         8. spring03 폴더에 Generate into this folder
     
 - Spring Boot JPA 프로젝트 개발 시작
+    <!-- 설정 -->
     1. build.gradle 의존성 확인
     2. application.properties 기본설정 입력(포트번호, 로그 색상, 자동재빌드, 로그레벨)
-    3. 각 기능별로 폴더를 생성(Controller, service, entity...)
+    3. MVC 패턴에 맞춰서 각 기능별로 폴더를 생성(Controller, service, entity...)
     4. /controller/MainController.java 생성, 기본 기능 구현
+    5. application.properties에 H2, JPA 설정 추가
+    6. 웹 서버 실행 http://localhost:8080/h2-console DB 연결확인
+    <!-- 개발 -->
+    7. /entity/Board.java 생성
+        - GenerationType 타입
+            - AUTO: Spring Boot에서 자동으로 선택
+            - IDENTITY: MySQL, SQLServer
+            - SEQUENCE: Oracle(!)
+
+        - Column 이름을 createDate로 만들면 DB에 컬럼명이 create_date로 생성
+            - 컬럼명에 언더바(_)를 안 넣으려면 @Column(name="createDate")로 명시해서 사용
+    8. /entity/Reply.java 생성
+    9. 두 엔티티간 @OneToMany, @ManyToOne 설정
+    10. 웹 서버 재시작 후 h2-console에서 테이블 생성 확인\
+    11. /repository/BoardRepository.java 빈 인터페이스(JpaRepository 상속) 생성
+    12. /repository/ReplyRepository.java 빈 인터페이스(JpaRepository 상속) 생성
+    13. application.properties ddl-auto= create에서 update 변경
+    14. /test/.../repository/BoardRepositoryTests.java 생성, 테스트 메서드 작성
+    15. 테스트 시작 > 확인 > 웹서버 실행 > h2-console 확인
