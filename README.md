@@ -83,7 +83,7 @@
             - 설정(ctrl + ,) > browser > Spring > DashBoard Open with 'Internal' -> 'external'로 변경
             - 크롬으로 기본 브라우저로 사용하는 거 추천
 
-## 2일차
+## 2, 3일차
 - Oracle 도커로 설치
     - Docker는 Virtual Machine을 업그레이드한 시스템
     - 윈도우 서비스 내(services.msc) Oracle 관련 서비스 종료
@@ -198,4 +198,37 @@
         7. 사용자가 접근하는 컨트롤러 @RestController 클래스 생성 -> @Controller 변경 가능
         8. **(Controller)**경우에 따라 @SpringBootApplication 클래스에 SqlSessionFactory 빈을 생성, 매소드 작성
         9. **(View)**/resources/templates/Thymeleaf html 생성, 작성
+
+## 4일차
+- Spring Boot JPA + Oracle + Thymeleaf + React
+    - JPA: DB 설계를 하지 않고 엔티티 클래스를 DB로 자동생성 해주는 기술, Query도 만들 필요 없음
+    - H2: Oracle, MySQL, SQLServer 등과 달리 Inmemory DB, 스프링부트 실행되면 같이 실행되는 DB
+        - 개발 편의성. 다른 DB로 전환 시 편리, 개발하는 동안 사용 추천
+    - Thymeleaf: JSP의 단점인 복잡한 템플릿 형태 + 스파게티코드를 해소시켜주는 템플릿
+    - Bootstrap: CSS, 웹디자인 최고
+    - React: 프론트 엔드를 분리, 백엔드 서버와 프론트 엔드 서버 따로 관리
+    - 소셜로그인: 구글, 카카오, 네이버 등 소셜로 로그인 가능
+
+- Spring Boot JPA 프로젝트 생성
+    - 명령 팔레트 시작, Spring Initializr: Create a Gradle Project
+    - Spring Boot version: 3.2.6
+    - Project language: Java
+    - Group Id: com.vinca
+    - Articfact id: backboard
+    - Packaging type: Jar
+    - Java version: 17
+    - Dependency
+        1. Spring Boot Devtools
+        2. Lombok
+        3. Spring Web
+        4. Thymeleaf
+        5. Ocacle DB Driver(나중에)
+        6. H2 Database(나중에)
+        7. Data JPA(나중에)
+        8. spring03 폴더에 Generate into this folder
     
+- Spring Boot JPA 프로젝트 개발 시작
+    1. build.gradle 의존성 확인
+    2. application.properties 기본설정 입력(포트번호, 로그 색상, 자동재빌드, 로그레벨)
+    3. 각 기능별로 폴더를 생성(Controller, service, entity...)
+    4. /controller/MainController.java 생성, 기본 기능 구현
