@@ -252,3 +252,18 @@
     13. application.properties ddl-auto= create에서 update 변경
     14. /test/.../repository/BoardRepositoryTests.java 생성, 테스트 메서드 작성
     15. 테스트 시작 > 확인 > 웹서버 실행 > h2-console 확인
+
+## 5일차
+- Java Test 중 OpenJDK 64-Bit Server VM warning:... 발생
+    - 설정 > java test config > setting.json 편집
+    ```json
+        "java.test.config": {
+        "vmArgs": [
+            "-Xshare:off"
+        ]
+    }
+    ```
+    - 저장 후 실행
+
+- Spring Boot JPA 프로젝트 개발 계속
+    15.
