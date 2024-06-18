@@ -16,5 +16,10 @@ public class MainController {
         log.info("getHello(); 실행");
         return "hello";
     }
+
+    @GetMapping("/")
+    public String getMain() {
+        return "redirect:/board/list";  // localhost:8080-> localhost:8080/board/list
+    }
     
 }
