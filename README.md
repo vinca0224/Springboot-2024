@@ -265,12 +265,28 @@
     ```
     - 저장 후 실행
 
+- Spring Boot 프로젝트 오류처리
+    - 빌드를 해도 제대로 결과가 반영 안되면
+    - 깃허브 원격 리포지토리에 모두 커밋 후 로컬 리포지토리 삭제 후 새로 프로젝트 로드
+
 - Spring Boot JPA 프로젝트 개발 계속
-    15. jUnit 테스트로 CRUD 확인
-    16. /service/BoardService.java 생성 후 getList 메서드 작성
-    17. /controller/BoardController.java 생성 후 /board/list 실행할 수 있는 메서드 작성
-    18. /templates/board/list.html 생성
+    1. jUnit 테스트로 CRUD 확인
+    2. /service/BoardService.java 생성 후 getList 메서드 작성
+    3. /controller/BoardController.java 생성 후 /board/list 실행할 수 있는 메서드 작성
+    4. /templates/board/list.html 생성
         - Thymelaef 속성
             - th:if= "${board != null}"
             - th:each= "${boardList}"
             - th:text= "${boarrd.title}"
+    5. /service/BoardService.java에 getBoard() 추가
+    6. /controller/BoardCopntroller.java에 /board/detail{bno} 실행 메서드 작성
+    7. /templates//board/detail.html 작성
+    8. templates/board/detail.html에 댓글 영역 추가
+    9. service/ReplyService.java 생성, 댓글 저장 메서드 작성
+    10. /controller/ReplyController.java 생성, /reply/create{bno} 포스트 매핑 메서드 작성
+    
+    11. Bootstrap 적용
+        - 다운로드 후 프로젝트에 위치
+        - CDN 링크를 추가
+        - http://www.getbootstrap.com 다운로드 후 압축 해제
+        - bootstrap.min.css, bootstrap.min.js templates/static에 위치
