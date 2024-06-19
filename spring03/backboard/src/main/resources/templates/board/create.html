@@ -3,14 +3,15 @@
     <div layout:fragment="main-content" class="container my-3">
         <h5 class="border-bottom my-3 pb-2">게시글 등록/수정</h5>
 
-        <form th:action="@{/board/create}" method="post">
+        <form th:action="@{/board/create}" th:object="${boardForm}" method="post">
+            <div th:replace="~{errors::formErrorFragment}"></div>
             <div class="mb-3">
                 <label for="title" class="form-label">글 제목</label>
-                <input type="text" name="title" id="title" class="form-control">
+                <input type="text" th:field="*{title}" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">글 내용</label>
-                <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+                <textarea name="content" th:field="*{content}" class="form-control" rows="10"></textarea>
             </div>
             <div class="d-flex justify-content-end">
                 <input type="submit" value="저장" class="btn btn-sm btn-primary">

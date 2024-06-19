@@ -281,6 +281,9 @@
     5. /service/BoardService.java에 getBoard() 추가
     6. /controller/BoardCopntroller.java에 /board/detail{bno} 실행 메서드 작성
     7. /templates//board/detail.html 작성
+
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp003.png" width="350">
+
     8. templates/board/detail.html에 댓글 영역 추가
     9. service/ReplyService.java 생성, 댓글 저장 메서드 작성
     10. /controller/ReplyController.java 생성, /reply/create{bno} 포스트 매핑 메서드 작성
@@ -291,6 +294,8 @@
         - http://www.getbootstrap.com 다운로드 후 압축 해제
         - bootstrap.min.css, bootstrap.min.js templates/static에 위치
     12. /templates/board/list.html, detail.html 부트스트랩 적용
+
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp004.png" width="730">
 
 ## 6일차
 - Spring Boot JPA 프로젝트 개발 계속
@@ -305,3 +310,18 @@
     9. /controller/BoardConteroller.java create() PostMapping 메서드 작성
     10. (문제) 아무 내용도 안 적어도 저장됨
     11. (설정) build.gradle 입력값 검증 Spring Boot Validation dependency 추가
+    12. /validation/BoardForm.java 클래스 생성
+    13. /controller/BoardController.java에 BoardForm을 전달(Get, PostMapping 둘다)
+    14. create.html 입력항목 name, id를 th:field로 변경(ex. th:field=*{title})
+    15. 댓글 등록에도 반영. ReplyForm, ReplyController, detail.html 작업(12 ~ 14번 내용과 유사)
+    16. detail.html 경고영역 div는 create.htm에서 복사함
+    17. 각 입력창에 공백을 넣었을 때 입력되는 문제: @NotEmpty는 스페이스를 허용 -> @NotBlank로 변경
+
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp005.png" width="350">
+
+    18. 네비게이션바(navbar) 추가
+    19. 테스트로 더미데이터 추가
+
+## 7일차
+- Spring Boot JPA 프로젝트 개발 계속
+    1. 페이징

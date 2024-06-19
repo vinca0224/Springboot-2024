@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vinca.backboard.entity.Board;
 import com.vinca.backboard.service.BoardService;
+import com.vinca.backboard.validation.BoardForm;
+import com.vinca.backboard.validation.ReplyForm;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,21 +38,26 @@ public class BoardController {
         return "board/list";   //templates/board/list.html 렌더링 해서 리턴
     }
     
+    // 댓글 검증을 추가하려면 매개변수로 replyForm을 전달
     @GetMapping("/detail/{bno}")
-    public String detail(Model model, @PathVariable("bno") Long bno) throws Exception {
+    public String detail(Model model, @PathVariable("bno") Long bno, ReplyForm replyForm) throws Exception {
         Board board = this.boardService.getBoard(bno);
         model.addAttribute("board", board);
         return "board/detail";
     }
     
     @GetMapping("/create")
-    public String create() {
+    public String create(BoardForm boardForm) {
         return "board/create";
     }
     
     @PostMapping("/create")
-    public String create(@RequestParam("title") String title, @RequestParam("content") String content) {
-        this.boardService.setBoard(title, content);        
+    public String create(@Valid BoardForm boardForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "board/create"; // 현재 html에 그대로 머무르기
+        }
+        // this.boardService.setBoard(title, content);        
+        this.boardService.setBoard(boardForm.getTitle(), boardForm.getContent());
         return "redirect:/board/list";
     }
     
