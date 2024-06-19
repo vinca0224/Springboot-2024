@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vinca.backboard.entity.Board;
 import com.vinca.backboard.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
-// import org.springframework.web.bind.annotation.RequestMethod;
-// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+
 
 
 @RequestMapping("/board")   //Restfuil URL은 /board로 시작
@@ -37,6 +40,17 @@ public class BoardController {
         Board board = this.boardService.getBoard(bno);
         model.addAttribute("board", board);
         return "board/detail";
+    }
+    
+    @GetMapping("/create")
+    public String create() {
+        return "board/create";
+    }
+    
+    @PostMapping("/create")
+    public String create(@RequestParam("title") String title, @RequestParam("content") String content) {
+        this.boardService.setBoard(title, content);        
+        return "redirect:/board/list";
     }
     
 }

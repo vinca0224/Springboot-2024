@@ -1,5 +1,6 @@
 package com.vinca.backboard.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +28,12 @@ public class BoardService {
         }else{  // 없으면 오류 발생
             throw new Exception("board not found");
         }
+    }
+
+    public void setBoard(String title, String content){
+        // builder로 생성한 board 객체
+        Board board = Board.builder().title(title).content(content).createDate(LocalDateTime.now()).build();
+        
+        this.boardRepository.save(board);
     }
 }
