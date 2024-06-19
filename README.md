@@ -282,7 +282,7 @@
     6. /controller/BoardCopntroller.java에 /board/detail{bno} 실행 메서드 작성
     7. /templates//board/detail.html 작성
 
-        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp003.png" width="350">
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp003.png" width="730">
 
     8. templates/board/detail.html에 댓글 영역 추가
     9. service/ReplyService.java 생성, 댓글 저장 메서드 작성
@@ -317,7 +317,7 @@
     16. detail.html 경고영역 div는 create.htm에서 복사함
     17. 각 입력창에 공백을 넣었을 때 입력되는 문제: @NotEmpty는 스페이스를 허용 -> @NotBlank로 변경
 
-        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp005.png" width="350">
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp005.png" width="730">
 
     18. 네비게이션바(navbar) 추가
     19. 테스트로 더미데이터 추가
