@@ -11,9 +11,11 @@
             </thead>
             <tbody>
                 <tr th:each="board, loop : ${paging}">
-                    <td th:text="${loop.count}"></td>
+                    <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
                     <td>
                         <a th:href="@{|/board/detail/${board.bno}}" th:text="${board.title}"></a>
+                        <span th:if="${#lists.size(board.replyList) > 0}" th:th:text="${#lists.size(board.replyList)}"
+                              class="badge text-bg-success"></span>
                     </td>
                     <td>[[${#temporals.format(board.createDate, 'yyyy-MM-dd. HH시 mm분')}]]</td>
                 </tr>

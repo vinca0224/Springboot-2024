@@ -27,8 +27,8 @@ public class BoardRepositoryTests {
 
     @Test
     void testThreeHundredBoards(){
-        for(int i=0; i< 300; i++){
-            this.boardService.setBoard(String.format("테스트 데이터 - [%03d]", i+1), "별내용 없음");
+        for(int i=0; i< 400; i++){
+            this.boardService.setBoard(String.format("Oracle 테스트 데이터 - [%03d]", i+1), "별내용 없음");
         }
     }
 
