@@ -10,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="board, loop : ${boardList}">
+                <tr th:each="board, loop : ${paging}">
                     <td th:text="${loop.count}"></td>
                     <td>
                         <a th:href="@{|/board/detail/${board.bno}}" th:text="${board.title}"></a>
@@ -19,6 +19,35 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- 페이징 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <!-- 처음 -->
+                <li th:classappend="${!paging.hasPrevious} ? disabled" class="page-item">
+                    <a th:href="@{|?page=0|}" class="page-link">«</a>
+                </li>
+                <!-- 이전 -->
+                <li th:classappend="${!paging.hasPrevious} ? disabled" class="page-item">
+                    <a th:href="@{|?page=${paging.number-1}|}" class="page-link">‹</a>
+                </li>
+                <!-- 페이지 번호 -->
+                <li th:each="page : ${#numbers.sequence(0,paging.totalPages-1)}"
+                    th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                    th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                    <a th:href="@{|?page=${page}|}" th:text="${page+1}" class="page-link"></a>
+                </li>
+                <!-- 다음 -->
+                <li th:classappend="${!paging.hasNext} ? disabled" class="page-item">
+                    <a th:href="@{|?page=${paging.number+1}|}" class="page-link">›</a>
+                </li>
+                <!-- 끝 -->
+                <li th:classappend="${!paging.hasNext} ? disabled" class="page-item">
+                    <a th:href="@{|?page=${paging.totalPages-1}|}" class="page-link">»</a>
+                </li>
+            </ul>
+        </div>
+
         <div class="d-flex justify-content-end">
             <a th:href="@{/board/create}" class="btn btn-sm btn-primary">게시글 등록</a>
         </div>

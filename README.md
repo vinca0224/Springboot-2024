@@ -324,4 +324,18 @@
 
 ## 7일차
 - Spring Boot JPA 프로젝트 개발 계속
+    0. 개념
+    ```sql
+    -- Oracle 전용(11g 이하는 이 쿼리 동작안함)
+    select b1_0.bno,b1_0.content,b1_0.create_date,b1_0.title \
+    from board b1_0 offset 0    -- 0부터 시작해서 페이지 사이즈만큼 증가 
+    rows fetch first 10 rows only   -- 페이지 사이즈
+    ```
     1. 페이징
+        - /repository/BoardRepository.java에 findAll(pageable) 인터페이스 메서드 작성
+        - /service/BoardService.java에 getList(page) 메서드 작성
+        - /controller/BoardController.java에 list() 메서드 수정
+        - /templates/board/list.html에 boardList -> paging 변경
+        - /templates/board/list.html 하단에 페이징 버튼 추가, Thymeleaf 기능 추가
+        - /service/BoardService.java에 getList() 최신순 역정렬로 변경
+    2. 
