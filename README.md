@@ -399,6 +399,8 @@
         - /templates/board/list.html table 태그에 작성자 컬럼 추가
         - /templates/board/detail.html 게시글 작성자, 댓글 작성자 표시 추가
 
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp006.png" width="730">
+
 ## 9일차
 - Spring Boot JPA 프로젝트 개발 계속
     - 수정, 삭제
