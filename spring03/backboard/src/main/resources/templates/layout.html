@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg bg-secondary border-bottom" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">BackBoard</a>
-                <!-- 햄버거 버튼 toggle (브라우저 사이즈가) -->
+                <!-- 햄버거 버튼 toggle (브라우저 사이즈가 1200px 작아지면) -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <!-- 로그인 안했을 때 -->
+                            <a th:href="@{/member/login}" sec:authorize="isAnonymous()" class="nav-link">로그인</a>
+                            <!-- 로그인 이후에 -->
+                            <a th:href="@{/member/logout}" sec:authorize="isAuthenticated()" class="nav-link">로그아웃</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/member/register}" sec:authorize="isAnonymous()" class="nav-link">회원가입</a>
                         </li>
                     </ul>
                 </div>
