@@ -50,6 +50,19 @@ public class BoardService {
         Board board = Board.builder().title(title).content(content).createDate(LocalDateTime.now()).build();
         board.setWriter(writer);
 
-        this.boardRepository.save(board);
+        this.boardRepository.save(board);   // PK가 없으면 INSERT
+    }
+
+    // 24.06.24 modBoard 추가 작성
+    public void modBoard(Board board, String title, String content){
+        board.setTitle(title);
+        board.setContent(content);
+        board.setModifyDate(LocalDateTime.now());
+
+        this.boardRepository.save(board);   //PK가 있으면 UPDATE
+    }
+
+    public void remBoard(Board board){
+        this.boardRepository.delete(board);
     }
 }

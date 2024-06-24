@@ -403,6 +403,24 @@
 
 ## 9일차
 - Spring Boot JPA 프로젝트 개발 계속
+    1. 수정, 삭제 기능
+        - /entity/Board, Reply.java 수정일자 필드 추가
+        - /templates/board/detail.html 수정, 삭제 버튼 추가
+            - sec:authorize="isAuthenticated()" 가 없으면 500 에러발생
+        - /controller/BoardController.java 에 modify() GET 메서드 작성
+        - /templates/board/create.html form th:action을 삭제
+            - create.html 생성, 수정할 때 모두 사용
+            - get이 /board/create로 들어가면 post도 /board/create로 실행되고, /board/modify/{bno}로 페이지를 들어가면 post도 같은 url로 실행
+        - service/BoardService.java 수정관련된 메서드 추가작성
+        - /controller/BoardController.java 에 modify() POST 메서드 작성
+            - html에는 BoardForm 객체값이 들어있음. 컨트롤러에 받아서 Board 객체 다시 만들어 서비스로 전달
+        - /service/BoardService.java 삭제관련 메서드 추가
+        - /controller/BoardController.java delete() Get 메서드 작성
+        - /templates/board/detail.html 댓글 수정, 삭제 버튼 추가
+        - /service/ReplyService.java 수정, 삭제관련 메서드 추가
+        - /controller/ReplyController.java modify GET, POST 메서드, 삭제 GET 메서드 작성
+        - /templates/reply/modify.html 생성, 작성
+
     - 수정, 삭제
     - 앵커기능
     - 마크다운 적용, 마크다운 에디터 추가

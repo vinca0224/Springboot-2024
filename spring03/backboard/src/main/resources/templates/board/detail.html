@@ -6,17 +6,29 @@
         <h2 th:text="${board.title}" class="border-bottom py-2"></h2>
         <div class="card text-bg-light my-3">
             <div class="card-body">
-                    <div th:text="${board.content}" class="card-text"></div>
-                    <!-- 작성자와 작성일을 표시 -->
-                    <div class="d-flex justify-content-end">
-                        <div class="badge bg-secondary p-2">
-                            <div class="mb-2">
-                                <span th:if="${board.writer != null}"
-                                      th:th:text="${board.writer.username}"></span>
-                            </div>
-                            <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd. HH시 mm분')}"></div>
+                <div th:text="${board.content}" class="card-text"></div>
+                <!-- 작성자와 작성일을 표시 -->
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-secondary p-2">
+                        <div class="mb-2">
+                            <span th:if="${board.writer != null}"
+                                    th:th:text="${board.writer.username}"></span>
                         </div>
+                        <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd. HH시 mm분')}"></div>
                     </div>
+
+                </div>
+                <!-- 수정 삭제버튼 영역 -->
+                <div class="my-1 d-flex justify-content-end">
+                    <a th:href="@{|/board/modify/${board.bno}|}" 
+                       th:if="${board.writer != null and #authentication.getPrincipal().getUsername() == board.writer.username}"
+                       sec:authorize="isAuthenticated()"
+                       class="btn btn-sm btn-outline-success mx-2">수정</a>
+                    <a th:if="${board.writer != null and #authentication.getPrincipal().getUsername() == board.writer.username}"
+                       sec:authorize="isAuthenticated()"
+                       th:data-uri="@{|/board/delete/${board.bno}|}"
+                       href="javascript:void(0);" class="delete btn btn-sm btn-outline-danger">삭제</a>
+                </div>
             </div>
         </div>
 
@@ -34,6 +46,14 @@
                         </div>
                         <div th:text="${#temporals.format(reply.createDate, 'yyyy-MM-dd. HH시 mm분')}"></div>
                     </div>
+                    <!-- 수정삭제 버튼 영역 -->
+                    <div th:if="${reply.writer != null and #authentication.getPrincipal().getUsername() == reply.writer.username}"  
+                         sec:authorize="isAuthenticated()"
+                         class="my-3 d-flex justify-content-end">
+                        <a th:href="@{|/reply/modify/${reply.rno}|}" class="btn btn-sm btn-outline-success mx-2">수정</a>
+                        <a th:data-uri="@{|/reply/delete/${reply.rno}|}" 
+                           href="javascript:void(0)" class="delete btn btn-sm btn-outline-danger">삭제</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,4 +70,15 @@
             </div>
         </form>
     </div>
+    <script layout:fragment="sub-script" type="text/javascript">
+        const del_elements = document.getElementsByClassName("delete");
+        
+        Array.from(del_elements).forEach(function(element) {
+            element.addEventListener('click', function(){
+                if(confirm('삭제하시겠습니까?')){
+                    location.href = this.dataset.uri;
+                }
+            });
+        });
+    </script>
 </html>

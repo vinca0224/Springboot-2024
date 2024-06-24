@@ -1,9 +1,11 @@
 package com.vinca.backboard.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.vinca.backboard.common.NotFoundException;
 import com.vinca.backboard.entity.Board;
 import com.vinca.backboard.entity.Member;
 import com.vinca.backboard.entity.Reply;
@@ -26,5 +28,25 @@ public class ReplyService {
         reply.setWriter(writer);    //작성자 추가
         this.replyRepository.save(reply);
         log.info("댓글 객체 저장 성공");
+    }
+
+    // 댓글 수정을 위한 댓글 가져오기
+    public Reply getReply(Long rno){
+        Optional<Reply> reply = this.replyRepository.findById(rno);
+        if(reply.isPresent())
+            return reply.get();
+        else
+            throw new NotFoundException("Reply not found");
+    }
+
+    // 댓글 수정처리
+    public void modReply(Reply reply, String content){
+        reply.setContent(content);
+        reply.setModifyDate(LocalDateTime.now());
+    }
+
+    // 댓글 삭제
+    public void remReply(Reply reply){
+        this.replyRepository.delete(reply);
     }
 }
