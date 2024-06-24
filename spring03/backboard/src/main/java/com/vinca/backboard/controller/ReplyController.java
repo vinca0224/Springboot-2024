@@ -50,9 +50,9 @@ public class ReplyController {
             model.addAttribute("board", board);
             return "board/detail";        
         }
-        this.replyService.setReply(board, replyForm.getContent(),writer);
+        Reply reply = this.replyService.setReply(board, replyForm.getContent(),writer);
         log.info("ReplyController 댓글 저장 처리완료");
-        return String.format("redirect:/board/detail/%s", bno);
+        return String.format("redirect:/board/detail/%s#reply_%s", bno, reply.getRno()); // 새로 생성된 게시글 위치로 
     }
 
     @PreAuthorize("isAuthenticated()")  //로그인시만 작성가능
@@ -78,7 +78,8 @@ public class ReplyController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.replyService.modReply(reply, replyForm.getContent());
-        return String.format("redirect:/board/detail/%s", reply.getBoard().getBno());
+        // 수정이 완료되면 그 댓글로 위치
+        return String.format("redirect:/board/detail/%s#reply_%s", reply.getBoard().getBno(), reply.getRno());
     }
     
     @PreAuthorize("isAuthenticated()")  //로그인시만 작성가능

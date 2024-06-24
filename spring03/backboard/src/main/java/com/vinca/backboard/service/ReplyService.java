@@ -21,13 +21,16 @@ public class ReplyService {
     
     private final ReplyRepository replyRepository;
 
-    public void setReply(Board board, String content, Member writer){
+    // return이 void -> Reply
+    public Reply setReply(Board board, String content, Member writer){
         // 빌더를 사용한 방식
         Reply reply = Reply.builder().content(content).createDate(LocalDateTime.now()).board(board).build();
         log.info("댓글 객체 생성");
         reply.setWriter(writer);    //작성자 추가
         this.replyRepository.save(reply);
         log.info("댓글 객체 저장 성공");
+
+        return reply;
     }
 
     // 댓글 수정을 위한 댓글 가져오기
@@ -43,6 +46,7 @@ public class ReplyService {
     public void modReply(Reply reply, String content){
         reply.setContent(content);
         reply.setModifyDate(LocalDateTime.now());
+        this.replyRepository.save(reply);
     }
 
     // 댓글 삭제

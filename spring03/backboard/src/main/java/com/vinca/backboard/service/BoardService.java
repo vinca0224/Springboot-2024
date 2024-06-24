@@ -11,11 +11,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+// 복합쿼리 생성용 
+import org.springframework.data.jpa.domain.Specification;
+
 import com.vinca.backboard.common.NotFoundException;
 import com.vinca.backboard.entity.Board;
 import com.vinca.backboard.entity.Member;
+import com.vinca.backboard.entity.Reply;
 import com.vinca.backboard.repository.BoardRepository;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -34,6 +44,16 @@ public class BoardService {
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));   // pagesize를 동적으로도 변경할 수 있음
         return this.boardRepository.findAll(pageable);
+    }
+
+    // 24. 06. 24. 검색 추가 메서드
+    public Page<Board> getList(int page, String keyword){
+        List<Sort.Order> sorts =  new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));   // pagesize를 동적으로도 변경할 수 있음
+
+        Specification<Board> spec = searchBoard(keyword);
+        return this.boardRepository.findAll(spec, pageable);
     }
 
     public Board getBoard(Long bno){
@@ -64,5 +84,23 @@ public class BoardService {
 
     public void remBoard(Board board){
         this.boardRepository.delete(board);
+    }
+
+    public Specification<Board> searchBoard(String keyword){
+        return new Specification<Board>() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Predicate toPredicate(Root<Board> b, CriteriaQuery<?> query, CriteriaBuilder cb){
+                // query를 JPA로 생성
+                query.distinct(true);   // 중복제거
+                Join<Board, Reply> r= b.join("replyList", JoinType.LEFT);
+
+                return cb.or(cb.like(b.get("title"), "%" + keyword + "%"), // 게시글 제목에서 검색
+                             cb.like(b.get("content"), "%" + keyword + "%" ), // 게시글 내용에서 검색
+                             cb.like(r.get("content"), "%" + keyword + "%") // 댓글 내용에서 검색
+                            );
+            }
+        };
     }
 }
