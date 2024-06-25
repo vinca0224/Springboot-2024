@@ -465,11 +465,14 @@
     3. 카테고리 추가
         - /entity/Category.java 클래스 생성
         - /repository/CategoryRepository.java 인터페이스 생성
-        - /service/CategoryService.java 추가
-        - /service/BoardService.java 조회조건에 카테고리 추가 수정
+        - /service/CategoryService.java 생성
+        - /entity/Board.java에 catrgory 속성을 추가
+        - /service/BoardService.java getList(), searchBoard(), **setBoard()** 추가 생성
         - 카테고리를 자유게시판. 질문응답 게시판 분리
-        - /templates/layout.html navbar.html 추가기입
-        - /Controller/BoardController.java GetMapping 메서드에 카테고리를 추가
+        - /templates/layout.html 사이드바 태그 추가기입
+        - /Controller/BoardController.java CategoryService, GetMapping 메서드에 카테고리 매개변수를 추가
+        - /templates/list.html 카테고리 변수 추가
+        - /controller/BoardController.java create() GET, POST 메서드에 catgegory 추가
     
     4. 조회수 표시
         - /entity/Board.java 조회수 필드 추가
@@ -478,7 +481,7 @@
         - /templates/board/list.html 조회수 컬럼 추가
 
     - 카테고리 추가(게시판, QnA, 공지사항)
-    - 비밀번호 찾기, 비밀번호 변겅
+    - 비밀번호 찾기, 비밀번호 변경
     - 조회수 추가
 
     - 리액트 적용
