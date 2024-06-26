@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
                     XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN  // ignoringRequestMatchers 영역에 있는 프레임 해제 요청
                 )))
-            // 로그인 url을 지정 ~/member/login, 로그인 성공하면 루트로 변경ㄴ
+            // 로그인 url을 지정 ~/member/login, 로그인 성공하면 루트로 변경
             .formLogin((fl) -> fl.loginPage("/member/login")
                 .defaultSuccessUrl("/"))
             //로그아웃처리

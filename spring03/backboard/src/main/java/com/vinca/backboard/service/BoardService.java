@@ -27,6 +27,7 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -147,5 +148,20 @@ public class BoardService {
                               ));
             }
         };
+    }
+
+    // 조회수 증가 메서드
+    @Transactional  // 조회하면서 update 하기 때문에
+    public Board hitBoard(Long bno){
+        Optional<Board> oboard = this.boardRepository.findByBno(bno);   // Optional: null 체크
+        if(oboard.isPresent()){
+            Board board = oboard.get();
+            // board.setHit(board.getHit() + 1);   // NullPointException 발생
+            board.setHit(Optional.ofNullable(board.getHit()).orElse(0) + 1);
+            return board;
+        }else{
+            throw new NotFoundException("Board not found");
+        }
+
     }
 }

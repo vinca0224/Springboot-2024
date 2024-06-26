@@ -480,9 +480,127 @@
         - /controller/BoardController.java detail() 메서드 추가
         - /templates/board/list.html 조회수 컬럼 추가
 
-    - 카테고리 추가(게시판, QnA, 공지사항)
+
+## 11일차
+- Spring Boot JPA 프로젝트 개발 계속
+    0. Restful URL 잘못된 부분 발견
+        - /controller/MainController.java main() 메서드 URL 변경
+
+    1. 조회수 표시
+        - /entity/Board.java 조회수 필드 추가
+        - /service/BoardService.java hitBoard() 메서드 추가
+        - /controller/BoardController.java detail() 메서드 수정
+        - /templates/board/list.html 조회수 컬럼 추가
+        - DB를 Oracle -> H2
+    
+    2. (설정) AWS 사용
+        - https://aws.amazon.com/ko/ 접속
+            - 회원가입 및 로그인
+        - 라이트세일(https://lightsail.aws.amazon.com/) 접속
+            - 인스턴스 클릭 > 인스턴스 생성
+            - 리전: 서울
+            - 인스턴스 이미지 > Linux/Unix
+            - 블루프린트 > 운영체제 전용 > Ubuntu 22.04 LTS
+            - 인스턴스 플랜 > 듀얼 스택
+            - 크기 선택
+            - 인스턴스 확인 > 원하는 이름으로 변경 후 
+            - 인스턴스 생성
+            - 실행 중 확인 > 관리
+            - 네트워킹 > 고정 IP 연결 > IP 명 입력 > 생성
+            - IPv4 방화벽 > 규칙 추가 > 8080 추가
+            - 계정 > SSH키 > 기본키 다운로드(*.pem)
+        - PuTTY AWS 리눅스 서버 연결
+            - https://www.putty.org/ 다운로드
+            - PuTTYgen 실행 > Load > 기본키 선택 > Save private key 클릭 > .ppk로 저장
+            - PuTTY 실행
+                - Host Name: AWS 고정 IP 입력
+                - Connection > SSH > Auth > Credential : Private key를 .ppk로 선택
+                - Session > Saved Session명 입력 > Save
+                - Open 후 콘솔 login as: ubuntu 입력
+        - FileZilla (https://filezilla-project.org/download.php) 다운로드
+            - 사이트 관리자 열기
+                - 새 사이트
+                - 프로토콜: SFTP
+                - 호스트: 고정 IP 입력
+                - 사용키: ubuntu
+                - 키 파일: .ppl
+                
+        - 설정 변경
+            ```shell
+            > sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime (한국 시간 변경)
+            > hostname
+            > sudo hostnamectl set-hostname vinca
+            > sudo reboot (서버 재시작)
+
+            > sudo apt-get update (전체 서버 패키지 업데이트)
+            > java
+            > sudo apt-get install openjdk-17-jdk
+            > Do you want to continue? y
+            > java -version
+            openjdk version "17.0.11" 2024-04-16
+            penJDK Runtime Environment (build 17.0.11+9-Ubuntu-122.04.1)
+            OpenJDK 64-Bit Server VM (build 17.0.11+9-Ubuntu-122.04.1, mixed mode, sharing)
+            ``` 
+
+        - VSCode
+            - Gradle for java > Tasks > build > bootJar
+            - *-SNAPSHOT.jar 생성 확인
+
+        - FileZilla
+            - *.jar > AWS로 전송
+
+        - PuTTY
+            ```shell
+            > ls
+            ...
+            > cd boostserver
+            > ls
+            backboard-1.0.1-SNAPSHOT.jar
+            > java -jar backboard-1.0.1-SNAPSHOT.jar
+            ```
+            - sudo java -jar.. 로 실행하면 안됨
+
+      - 스프링부트서버 백그라운드 실행 쉘 작성
+         - > nano start.sh
+            ```shell
+            #!/bin/bash
+
+            JAR=backboard-1.0.2-SNAPSHOT.jar
+            LOG=/home/ubuntu/bootserver/backbord_log.log
+
+            nohup java -jar $JAR > $LOG 2>&1 &
+            ```
+         - 파일권한 바꾸기(실행가능)
+            ```shell
+            > chmod +x start.sh
+            ```
+
+         - > nano stop.sh
+            ```shell
+            #!/bin/bash
+
+            BB_PID=$(ps -ef | grep java | grep backboard | awk '{print $2}')
+
+            if [ -z "$BB_PID" ];
+            then
+               echo "BACKBOARD is not running"
+            else
+               kill -9 $BB_PID
+               echo "BACKBOARD terminated!"
+            fi
+            ```
+         - 파일권한 바꾸기(실행가능)
+            ```shell
+            > chmod +x stop.sh
+            ```
+         
+         - 서버실행
+        
+
+    - 에러페이지 생성(404, 500, etc)
     - 비밀번호 찾기, 비밀번호 변경
-    - 조회수 추가
+    - 소셜로그인: 구글
+    - 파일 업로드 - AWS S3 체크
 
     - 리액트 적용
     - 리액트로 프론트엔드 설정
