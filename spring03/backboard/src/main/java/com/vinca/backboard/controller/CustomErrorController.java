@@ -25,7 +25,7 @@ public class CustomErrorController implements ErrorController{
             }
         }
 
-        return "error"; // status 코드는 없는데 오류가 날 경우
+        return "error/error"; // status 코드는 없는데 오류가 날 경우
     }
     
 }
