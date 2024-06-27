@@ -156,8 +156,8 @@ public class BoardService {
         Optional<Board> oboard = this.boardRepository.findByBno(bno);   // Optional: null 체크
         if(oboard.isPresent()){
             Board board = oboard.get();
-            // board.setHit(board.getHit() + 1);   // NullPointException 발생
-            board.setHit(Optional.ofNullable(board.getHit()).orElse(0) + 1);
+            board.setHit(board.getHit() + 1);   // NullPointException 발생
+            // board.setHit(Optional.ofNullable(board.getHit()).orElse(ㅋ0) + 1);
             return board;
         }else{
             throw new NotFoundException("Board not found");

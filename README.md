@@ -595,20 +595,35 @@
             ```
          
          - 서버실행
-        
 
-    - 에러페이지 생성(404, 500, etc)
-    - 비밀번호 찾기, 비밀번호 변경
-    - 소셜로그인: 구글
+        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp011.png" width="730">
+
+## 12일차
+- Spring Boot JPA 프로젝트 개발 계속
+    1. 에러페이지 작업(404, 500, etc)
+        - application.properties 에러페이지 관련 설정 추가
+        - resource/static/img/bg_error.jpg 저장
+        - resource/templates/404.html, 500.html, error.html 페이지 생성
+        - /controller/CustomErrorController.java 생성
+        
+    2. 비밀번호 찾기, 비밀번호 변경
+        - build.gradle 메일을 보내기위한 디펜던시 추가
+        - application.properties 메일 설정 입력
+        - /service/MailService.java 생성
+        - 비밀번호 초기화 기능(메일 서버 세팅)
+        - 비밀번호 초기화 화면으로 이동
+        - 비밀번호, 비밀번호 확인 입력
+
+    3. 구글 로그인
+
+
     - 파일 업로드 - AWS S3 체크
+    - 로그인한 사용자 헤더에 표시
 
     - 리액트 적용
     - 리액트로 프론트엔드 설정
     - thymeleaf - 리액트로 변경
     - Spring boot RestAPI 작업
 
-    - AWS 라이트세일 가입
-    - 서버 접속 프로그램 설정
-    - 웹서버 배포
     - 8080 -> 80 서버
     - http -> https
