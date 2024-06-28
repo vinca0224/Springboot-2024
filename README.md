@@ -622,20 +622,44 @@
 
 ## 13일차
 - Spring Boot JPA 프로젝트 개발 계속
-    1. 비밀번호 초기화 계속
-        - 로그인 화면에서 비밀번호 초기화 버튼, AJAX로 REST API로 메일보내기
-        - 메일에 링크 클릭
-        - http://localhost:8080/user/resetpassword (회원가입과 유사하게 개발)
-        
-        - 비밀번호 초기화 화면으로 이동
-        - 비밀번호, 비밀번호 확인 입력
+    0. 메일 작업 중 생긴 오류
+        - 로그인하고 글 적으려면 500 에러 발생
+        - CSRF 토큰때문에 발생하는 오류
+        - /board/create.hmtl, /reply/modify.html 에 있는 csrf 관련 태그 주석처리
 
-    2. 구글 로그인
+    1. 비밀번호 초기화 계속
+        - /templates/member/loguin.html 비밀번호 초기화 버튼
+        - /controller/MemberController.java reset() 메서드 추가
+        - /templates/member/reset.html 생성 -> reset.html 가져와서 수정
+        - /controller/MailController.java 생성, /mail/reset-mail GET mapping 메서드 생성
+        - /service/MemberService.java 에 메일주소로 검색하는 getMemberByEmail() 메서드 추가 
+        - /service/MailService.java 에 메일전송 메서드 생성, 수정
+            - UUID 생성해서 메일로 전송하는 기능 추가
+
+            <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp014.png" width="730">
+
+        - /entity/Reset.java 생성
+        - /repository/ResetRepository.java 인터페이스 생성, findByUuid() 추가
+        - /service/ResetService.java 생성
+        - /service/MailService.java에 ResetService 객체 생성, 메일 전송 후 setReset() 사용
+        - /controller/MemberController.java. /member/reset-password GET 메서드 작성
+        - /templates/member/newpassword.html 생성
+        - /controller/MemberController.java, /member/reset-password POST 메서드 작성
+        - /service/MemberService.java 에 setMember() 메서드 추가
+
+            <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/sp013.png" width="730">
+        
+## 14일차
+- Spring Boot JPA 프로젝트 개발 계속
+    1. frintboard(React)
+
+    2. backboard(Rest API)
+
+    3. 구글 로그인
         - http:/console.cloud.google.com/ 구글 클라우드 콘솔
         - 프로젝트 생성
         - OAuth 동의화면 설정
         - 개발 계속
-
 
     - 리액트 적용
     - 리액트로 프론트엔드 설정

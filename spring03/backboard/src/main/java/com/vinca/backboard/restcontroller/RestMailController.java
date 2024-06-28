@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/mail")
-public class MailController {
+@RequestMapping("/api/mail")
+public class RestMailController {
     
     private final MailService mailService;
 
     @PostMapping("/test-email")
     public ResponseEntity<HttpStatus> testEmail() {
-        String to = "보낼 메일";
+        String to = "dlarudtp98@gmail.com";
         String subject = "전송테스트 메일";
         String message = "테스트 메일 메시지입니다.";
         
-        mailService.sentMail(to, subject, message);
+        mailService.sendMail(to, subject, message);
         return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }
     

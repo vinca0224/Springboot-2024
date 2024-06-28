@@ -21,9 +21,10 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // 새로운 사용자 생성
     public Member setMember(String username, String email, String password){
         Member member = Member.builder().username(username).email(email).regDate(LocalDateTime.now()).build();
-
+        
         // ... 처리되는 일이 많아서 1~2초 시간이 걸리면
         // BCryptPasswordEncoder 매번 새롭게 객체를 생성
         // 이 방법보다는 Bean에 등록하고 쓰는게 유지보수를 위해서 더 좋음
@@ -32,10 +33,16 @@ public class MemberService {
         member.setRegDate(LocalDateTime.now());
         member.setRole(MemberRole.USER);    // 일반 사용자 권한 부여
         this.memberRepository.save(member);
-
+        
         return member;
     }
     
+    // 기존 사용자 비밀번호 초기화
+    public void setMember(Member member) {
+        member.setPassword(passwordEncoder.encode(member.getPassword())); // Bcrypt 암호화
+        this.memberRepository.save(member); // update
+    }
+
     // 사용자를 가져오는 메서드
     public Member getMember(String username){
         Optional<Member> member = this.memberRepository.findByUsername(username);
@@ -45,4 +52,15 @@ public class MemberService {
         else
             throw new NotFoundException("Member not found");
     }
+
+    // 24. 06. 28. 이메일로 사용자 검색 메서드
+    public Member getMemberByEmail(String email){
+        Optional<Member> member = this.memberRepository.findByEmail(email);
+        if(member.isPresent()){
+            return member.get();
+        }else{
+            throw new NotFoundException("Member not found");
+        }
+    }
+
 }
