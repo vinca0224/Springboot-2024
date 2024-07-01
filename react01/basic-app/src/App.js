@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import CustomButton from './component/CustomButton'
+import { useState } from 'react';
+import IncButton from './component/IncButton';
 
 // 데이터 생성 시 보통 const 사용
 const ironman = {
@@ -23,6 +25,11 @@ const listWeapons = weapons.map(weapon =>
 );
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -35,9 +42,11 @@ function App() {
                 // borderRadius: '50%'
              }}
         ></img>
-        <h1>Hello, React.js</h1>
-        <ul>{listWeapons}</ul>
-        <CustomButton></CustomButton>
+        <IncButton count={count} onClick={handleClick}></IncButton>
+        <IncButton count={count} onClick={handleClick}></IncButton>
+        {/* <h1>Hello, React.js</h1> */}
+        {/* <ul>{listWeapons}</ul> */}
+        {/* <CustomButton data={ironman}></CustomButton> */}
       </header>
     </div>
   );

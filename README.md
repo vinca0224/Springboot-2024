@@ -745,15 +745,66 @@
         }
         ```
 
-        <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/react001.png" width="730">
-
     6. 목록 표시
         - for, map() 함수를 많이 사용
         - map()을 쓰면 for문보다 짧게 구현가능
+        - 각 child 요소마다 key 속성이 필요(없으면 warning 발생)
 
-- Spring Boot JPA 프로젝트 개발 계속
-    1. frontboard(React)
-        - 
+            <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/react001.png" width="730">
+
+    7. 이벤트 핸들링
+        - form + onSubmit, tag + onClick
+        - 이벤트 파라미터 전달
+        - 파라미터가 필요해서 함수 뒤에 ()를 쓰면 이벤트 순서에 따라 refresh 후 자동실행 됨 
+        - onClick={() => function()} 같은 람다식으로 변경
+    
+    8. 컴포넌트 간 데이터 전달
+        - props 속성
+        - props.속성이름.keyname
+
+            <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/react002.png" width="730">
+
+    9. 화면 업데이트
+        - userState : 앱 화면의 상태를 기억하고 사용하기 위한 객체
+        - import {userState} from 'react'; 필수
+        - const [count, setCount] = useState(0);
+
+    10. Hooks
+        - use로 시작하는 함수를 Hooks 라고 호칭. State, Effect 외 잘 안씀
+        - useState: React 컴포넌트 상태를 추가, 보관
+        - useEffect: 컴포넌트에서 사이드이펙트 수행할 때
+        - 기타: useContext, useReducer, useCallback, useRef, ...
+
+- 리액트 추가 내용
+    1. 리액트 관련 프레임워크
+        - Next.js - 풀스택 React 프레임워크
+        - Gatsby - 정적사이트 React 프레임워크
+        - React Native - Androidm iOs 멀티플랫폼 모바일 프레임워크
+
+    2. npm으로 추가 라이브러리 설치
+        - > npm install react react-dom
+
+    3. VS Code 확장
+        - ES7 + React/Redux/React-Native snippet 설치
+        - Simple React Snippets
+        - Import Cost: 라이브러리 비용 계산
+        - VSCode React Refactor
+    
+    4. 리액트 개발자 도구
+        - 크롬, 엣지 브라우저 별로 따로 존재
+        - React Developer Toole 설치
+
+- Spring Boot React 연동 프로젝트 개발 계속
+    1. 리액트 프로젝트 생성
+        - 터미널 /spring03으로 이동
+        - /spring03/frontboard 폴더 생성
+
+## 15일차
+
+## 계속
+- Spring Boot JPA 프로젝트
+    - 파일 업로드 - AWS S3 체크
+    - 로그인한 사용자 헤더에 표시
 
     2. backboard(Rest API)
 
@@ -767,11 +818,5 @@
     - 리액트로 프론트엔드 설정
     - thymeleaf - 리액트로 변경
     - Spring boot RestAPI 작업
-
-## 계속
-- Spring Boot JPA 프로젝트
-    - 파일 업로드 - AWS S3 체크
-    - 로그인한 사용자 헤더에 표시
-
     - 8080 -> 80 서버
     - http -> https
