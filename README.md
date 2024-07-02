@@ -794,12 +794,50 @@
         - 크롬, 엣지 브라우저 별로 따로 존재
         - React Developer Toole 설치
 
+## 15일차
 - Spring Boot React 연동 프로젝트 개발 계속
     1. 리액트 프로젝트 생성
         - 터미널 /spring03으로 이동
         - /spring03/frontboard 폴더 생성
 
-## 15일차
+    2. Spring Boot / React 같이 개발할 때
+        - Spring Boot 웹서버 실행
+        - React 프론트웹서버 실행
+
+    3. 리액트 라이브러리 설치, npm
+        - React 용 Bootstrap 설치
+        - > npm install react-bootstrap bootstrap : css 디자인
+        - **npm audit fix --force : 사용금지**
+        - > npm install axios : REST API 통신 라이브러리
+        - > npm install react-router-dom : 리액트 화면 네비게이션
+        - > npm install react-js-pagination : 리액트 페이징 처리
+
+    4. frontboard 개발시작
+        - App.js, logo.svg 삭제, rect-router-dom으로 Routes, Route 사용
+        - index.js, reportWebVitals() 삭제
+        - index.js, <React.StrictMode> 삭제 또는 주석처리
+        - /src/layout/Header.js, Footer.js 생성
+        - /src/routes/Home.js, BoardList.js, QnaList.js, Login.js 생성
+        - App.js에 Route 될 화면 추가
+        - Header.js 에 react-router-dom 추가, Link, useNavigate 사용
+
+    5. backboard RestAPI 추가
+        - /restcontroller/RestBoardController.java 생성, BoardController에 있는 메서드 복사
+        - 문제: Spring Boot 와 Rest API 간의 리턴 데이터 차이때문에 100% 호환안됨
+        - 문제: Spring Boot에서 만든 Entity는 Board와 Reply 등의 OneToMany / ManyToOne 가 JSON으로 변환할 때 문제가 발생
+        - /Entity 를 그대로 사용하지 말고, RESTAPI에서는 다른 클래스를 만들어야 함
+        - /dto/BoardDto.java 생성
+        - /dto/ReplyDto.java 생성
+        - /RestBoardController.java getList()를 Board Entity -> BoardDto로 변경
+        - /security/SecurityConfig.java CORS 설정 추가
+
+    7. frontboard 개발 계속
+        - /BoardList.js axios RestAPI 호출내용 추가
+            - 테이블 내용을 boardList.map() 10개 리스트 표시
+
+                <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/react003.png" width="730">
+
+    
 
 ## 계속
 - Spring Boot JPA 프로젝트
