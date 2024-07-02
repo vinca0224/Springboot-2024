@@ -838,6 +838,15 @@
                 <img src="https://raw.githubusercontent.com/vinca0224/Springboot-2024/main/images/react003.png" width="730">
 
     
+## 16일차
+- Spring Boot React 연동 프로젝트 개발 계속
+    1. 상세화면
+
+    2. 입력화면
+
+    3. 페이징
+    
+    4. 로그인
 
 ## 계속
 - Spring Boot JPA 프로젝트
