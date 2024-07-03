@@ -16,6 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BoardDto {
     
+    private Long num; // 게시글 번호, 24. 07. 03. 신규 추가
+
     private Long bno;                                       // PK
 
     private String title;                                   // 글제목

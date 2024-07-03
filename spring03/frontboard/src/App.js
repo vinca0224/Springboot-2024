@@ -10,6 +10,7 @@ import Home from './routes/Home';
 import BoardList from './routes/BoardList';
 import QnaList from './routes/QnaList';
 import Login from './routes/Login';
+import BoardDetail from './routes/BoardDetail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         {/* a, Link 링크를 누르면 화면전환될 페이지 */}
         <Route path='/home' element={<Home/>}></Route>
         <Route path='/boardList' element={<BoardList/>}></Route>
+        <Route path='/boardDetail/:bno' element={<BoardDetail/>}></Route>
         <Route path='/qnaList' element={<QnaList/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
       </Routes>
