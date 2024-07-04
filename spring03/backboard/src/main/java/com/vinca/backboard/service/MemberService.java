@@ -63,4 +63,26 @@ public class MemberService {
         }
     }
 
+    // 24. 07. 04. React에서 넘어온 정보로 로그인 확인하기
+    public Member getMemberByUsernameAndPassword(String username, String password) {
+        Optional<Member> _member = this.memberRepository.findByUsername(username);
+        Member member;
+        if (_member.isPresent()) {
+            member = _member.get(); // 같은 이름의 사용자 정보가 다 넘어옴(암호화된 비밀번호까지)
+
+            // plain text와 암호화된 값이 같은 값을 가지고 있는지 체크
+            boolean isMatched = passwordEncoder.matches(password, member.getPassword());
+
+            if (isMatched) {
+                return member;
+            }
+            else {
+                throw new NotFoundException("member not found");
+            }
+        } else {
+            throw new NotFoundException("member not found");
+
+        }
+    }
+
 }

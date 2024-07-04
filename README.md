@@ -863,29 +863,34 @@
 
 ## 17일차
 - Spring Boot React 연동 프로젝트 개발 계속
+    0. npm -> node 에서 만든 package manager
+        - yarn, brew, chocolatey,...
+        - node, npm, npz 명령어 먼저 공부
+
     1. 로그인
+        - (front) layout/Header.js 로그인, 회원가입 버튼으로 변경
+        - Login.js 화면 수정
+        - (back) RestMemberControllrer.java 생성 login() POST 메서드 작성
+        - MemberService.java, getMemberByUsernameAndPassword() 메서드 작성
+        - Postman에서 테스트
+        - (front) Login.js axios 부분 작성
+        - Home.js, localStorage 사용해서 로그인 정보 출력
+        - Header.js, 로그인 버튼 -> 로그아웃
 
     2. 상세화면 완료
+        - (front) Board.js에서 axios로 가져오기
+        - (back) RestBoardController.java detail() 리턴값 변경
 
-    3. 입력화면
-    
-
-## 계속
-- Spring Boot JPA 프로젝트
-    - 파일 업로드 - AWS S3 체크
-    - 로그인한 사용자 헤더에 표시
-
-    2. backboard(Rest API)
-
-    3. 구글 로그인
+## 남은 것
+- 추가 개발 필요
+    1. (front) 입력화면
+    2. (back) 구글 로그인
         - http:/console.cloud.google.com/ 구글 클라우드 콘솔
         - 프로젝트 생성
         - OAuth 동의화면 설정
         - 개발 계속
-
-    - 리액트 적용
-    - 리액트로 프론트엔드 설정
-    - thymeleaf - 리액트로 변경
-    - Spring boot RestAPI 작업
-    - 8080 -> 80 서버
-    - http -> https
+    3. (back) 포트 변경
+        - 8080 -> 80 서버
+    4. (back) Https 사용
+    5. (back) 파일업로드
+    6. 로그인한 사용자 헤더에 표시    
